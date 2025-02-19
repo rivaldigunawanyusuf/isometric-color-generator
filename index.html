@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Isometric Color Generator</title>
+      <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+      <div class="container">
+          <h2>Isometric Color Generator</h2>
+          <label for="colorInput">Base Color (Hex):</label>
+          <input type="text" id="colorInput">
+          
+          <label for="lightSource">Light Source:</label>
+          <select id="lightSource">
+              <option value="front">Front</option>
+              <option value="side">Side</option>
+              <option value="top">Top</option>
+          </select>
+          
+          <button onclick="generateColors()">Generate Colors</button>
+          
+          <div class="cube-preview">
+              <div class="cube-container">
+                  <div id="front" class="cube-face" onclick="copyColor('front')">Front<span class="copied">Copied!</span></div>
+                  <p class="hex-code" id="hex-front"></p>
+              </div>
+              <div class="cube-container">
+                  <div id="side" class="cube-face" onclick="copyColor('side')">Side<span class="copied">Copied!</span></div>
+                  <p class="hex-code" id="hex-side"></p>
+              </div>
+              <div class="cube-container">
+                  <div id="top" class="cube-face" onclick="copyColor('top')">Top<span class="copied">Copied!</span></div>
+                  <p class="hex-code" id="hex-top"></p>
+              </div>
+          </div>
+      </div>
+
+      <script src="script.js"></script>
+  </body>
+</html>
