@@ -4,7 +4,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 80vh;
   margin: 0;
   background-color: #f5f5f5;
 }
@@ -13,7 +13,6 @@ body {
   background: white;
   padding: clamp(15px, 3vw, 30px);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: min(90%, 800px);
   margin: 15px auto;
@@ -151,6 +150,46 @@ button {
   margin-top: 8px;
 }
 
+.github-link {
+  margin-top: 30px;
+}
+
+.github-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.github-icon {
+  fill: #24292f;
+}
+
+.github-text {
+  color: #24292f;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.view-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.repo-name {
+  font-weight: 600;
+}
+
+.github-text:hover {
+  color: #0969da;
+}
+
+.github-text:hover + .github-icon {
+  fill: #0969da;
+}
+
 @media screen and (max-width: 480px) {
   .container {
     width: 90%;
@@ -164,5 +203,22 @@ button {
 
   .cube-preview {
     gap: 8px;
+  }
+
+  .github-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .github-text {
+    align-items: center;
+  }
+
+  .view-text {
+    font-size: 12px;
+  }
+
+  .repo-name {
+    font-size: 14px;
   }
 }
