@@ -15,9 +15,9 @@ function adjustColor(color, percent) {
   b = Math.round(b * (1 + percent / 100));
   
   return rgbToHex(
-      Math.min(255, Math.max(0, r)),
-      Math.min(255, Math.max(0, g)),
-      Math.min(255, Math.max(0, b))
+    Math.min(255, Math.max(0, r)),
+    Math.min(255, Math.max(0, g)),
+    Math.min(255, Math.max(0, b))
   );
 }
 
@@ -34,17 +34,17 @@ function generateColors() {
   let darkShade = adjustColor(baseColor, -30);
 
   let colors = {
-      front: baseColor,
-      top: lightShade,
-      side: darkShade
+    front: baseColor,
+    top: lightShade,
+    side: darkShade
   };
 
   if (lightSource === "front") {
-      applyColors(colors.front, colors.top, colors.side);
+    applyColors(colors.front, colors.top, colors.side);
   } else if (lightSource === "side") {
-      applyColors(colors.side, colors.top, colors.front);
+    applyColors(colors.side, colors.top, colors.front);
   } else if (lightSource === "top") {
-      applyColors(colors.top, colors.front, colors.side);
+    applyColors(colors.top, colors.front, colors.side);
   }
 }
 
@@ -56,13 +56,25 @@ function applyColors(front, top, side) {
   document.getElementById("hex-front").textContent = front;
   document.getElementById("hex-side").textContent = side;
   document.getElementById("hex-top").textContent = top;
+
+  document.getElementById("front").style.background = front;
+  document.getElementById("side").style.background = side;
+  document.getElementById("top").style.background = top;
+
+  document.getElementById("hex-front").textContent = front;
+  document.getElementById("hex-side").textContent = side;
+  document.getElementById("hex-top").textContent = top;
+
+  document.getElementById("cube-body").setAttribute("fill", top);
+  document.getElementById("cube-front").setAttribute("fill", front);
+  document.getElementById("cube-side").setAttribute("fill", side);
 }
 
 function copyColor(face) {
   let color = document.getElementById(`hex-${face}`).textContent;
   navigator.clipboard.writeText(color).then(() => {
-      let copiedText = document.querySelector(`#${face} .copied`);
-      copiedText.style.display = "block";
-      setTimeout(() => copiedText.style.display = "none", 1000);
+    let copiedText = document.querySelector(`#${face} .copied`);
+    copiedText.style.display = "block";
+    setTimeout(() => copiedText.style.display = "none", 1000);
   });
 }

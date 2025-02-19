@@ -4,28 +4,92 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
   background-color: #f5f5f5;
 }
 
 .container {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: clamp(15px, 3vw, 30px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: min(90%, 800px);
+  margin: 15px auto;
 }
 
-input, select, button {
-  margin: 10px;
-  padding: 8px;
-  font-size: 16px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.flex-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.input-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: clamp(14px, 2vw, 16px);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.button-container {
+  margin: 1rem 0;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: clamp(14px, 2vw, 16px);
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+}
+
+.preview-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .cube-preview {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cube-container {
@@ -33,31 +97,33 @@ input, select, button {
 }
 
 .cube-face {
-  width: 120px;
-  height: 120px;
+  width: clamp(70px, 15vw, 120px);
+  height: clamp(70px, 15vw, 120px);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   position: relative;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cube-face:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cube-face::after {
   content: "Click to Copy";
   position: absolute;
   bottom: 10px;
-  font-size: 14px;
-  background: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 5px;
+  padding: 4px 8px;
   border-radius: 4px;
   opacity: 0;
   transition: opacity 0.2s;
@@ -67,20 +133,36 @@ input, select, button {
   opacity: 1;
 }
 
-.hex-code {
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 8px;
-}
-
 .copied {
   position: absolute;
   top: 5px;
   right: 5px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 5px;
+  padding: 4px 8px;
   font-size: 12px;
   border-radius: 4px;
   display: none;
+}
+
+.hex-code {
+  font-family: monospace;
+  color: #333;
+  margin-top: 8px;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 90%;
+    border-radius: 0;
+    padding: 15px;
+  }
+
+  .preview-container {
+    gap: 1rem;
+  }
+
+  .cube-preview {
+    gap: 8px;
+  }
 }
