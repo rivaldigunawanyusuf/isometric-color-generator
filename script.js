@@ -23,51 +23,60 @@ function adjustColor(color, percent) {
 
 function generateColors() {
   let baseColor = document.getElementById("colorInput").value;
-  let lightSource = document.getElementById("lightSource").value;
+  let lightSource = document.getElementById("lightSource").value || "left";
 
-  if (!baseColor) baseColor = "#000000";
-  if (!lightSource) lightSource = "front";
+  baseColor = baseColor.replace(/^#/, "").toUpperCase();
+  let percent = 0;
 
-  baseColor = baseColor.startsWith('#') ? baseColor : '#' + baseColor;
-
-  let lightShade = adjustColor(baseColor, -10);
-  let darkShade = adjustColor(baseColor, -30);
-
-  let colors = {
-    front: baseColor,
-    top: lightShade,
-    side: darkShade
+  const handleColorLength = {
+    0: () => "FFFAFA",
+    1: color => color.repeat(6),
+    2: color => color.repeat(3),
+    3: color => color.split('').map(c => c.repeat(2)).join(''),
+    4: color => {
+      percent = parseInt(color[3]) * 10;
+      return adjustColor(color.slice(0,3).split('').map(c => c.repeat(2)).join(''), percent);
+    },
+    5: color => {
+      percent = parseInt(color[3]) * 10 + parseInt(color[4]);
+      return adjustColor(color.slice(0,3).split('').map(c => c.repeat(2)).join(''), percent);
+    },
+    6: color => color
   };
 
-  if (lightSource === "front") {
-    applyColors(colors.front, colors.top, colors.side);
-  } else if (lightSource === "side") {
-    applyColors(colors.side, colors.top, colors.front);
-  } else if (lightSource === "top") {
-    applyColors(colors.top, colors.front, colors.side);
+  if (baseColor.length === 4 || baseColor.length === 5) {
+    baseColor = (handleColorLength[baseColor.length] || (x => x))(baseColor);
+  } else {
+    baseColor = '#' + (handleColorLength[baseColor.length] || (x => x))(baseColor);
   }
+
+  const shades = {
+    base: baseColor,
+    light: adjustColor(baseColor, -10),
+    dark: adjustColor(baseColor, -30)
+  };
+
+  const lightSourceMap = {
+    left: [shades.base, shades.light, shades.dark],
+    top: [shades.light, shades.base, shades.dark],
+    right: [shades.dark, shades.light, shades.base],
+  };
+
+  applyColors(...lightSourceMap[lightSource]);
 }
 
-function applyColors(front, top, side) {
-  document.getElementById("front").style.background = front;
-  document.getElementById("side").style.background = side;
+function applyColors(left, top, right) {
+  document.getElementById("left").style.background = left;
   document.getElementById("top").style.background = top;
+  document.getElementById("right").style.background = right;
 
-  document.getElementById("hex-front").textContent = front;
-  document.getElementById("hex-side").textContent = side;
+  document.getElementById("hex-left").textContent = left;
   document.getElementById("hex-top").textContent = top;
+  document.getElementById("hex-right").textContent = right;
 
-  document.getElementById("front").style.background = front;
-  document.getElementById("side").style.background = side;
-  document.getElementById("top").style.background = top;
-
-  document.getElementById("hex-front").textContent = front;
-  document.getElementById("hex-side").textContent = side;
-  document.getElementById("hex-top").textContent = top;
-
+  document.getElementById("cube-left").setAttribute("fill", left);
   document.getElementById("cube-body").setAttribute("fill", top);
-  document.getElementById("cube-front").setAttribute("fill", front);
-  document.getElementById("cube-side").setAttribute("fill", side);
+  document.getElementById("cube-right").setAttribute("fill", right);
 }
 
 function copyColor(face) {

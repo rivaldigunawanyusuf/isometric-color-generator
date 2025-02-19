@@ -6,7 +6,7 @@ Isometric Color Generator is a simple web-based tool that helps you generate iso
 This project is built using **only HTML, CSS, and JavaScript**, making it lightweight and easy to use. Hopefully, it helps those who need a quick and effective solution! 🚀  
 
 ## Features  
-- **Color Generation**: Generates **Front, Side, and Top** colors from a base color.  
+- **Color Generation**: Generates **Left, Top, and Right** colors from a base color.  
 - **Light Source Simulation**: Select the light direction to see color variations.  
 - **Click to Copy**: Click on a color to copy its HEX code to the clipboard.  
 - **Simple & Responsive UI**: Clean design with hover effects.  
