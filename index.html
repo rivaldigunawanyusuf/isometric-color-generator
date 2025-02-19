@@ -10,7 +10,7 @@
       <div class="container">
           <h2>Isometric Color Generator</h2>
           <label for="colorInput">Base Color (Hex):</label>
-          <input type="text" id="colorInput">
+          <input type="text" id="colorInput" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" placeholder="#000000">
           
           <label for="lightSource">Light Source:</label>
           <select id="lightSource">
