@@ -63,7 +63,7 @@ input, select {
 button {
   padding: 10px 20px;
   font-size: clamp(14px, 2vw, 16px);
-  background-color: #4CAF50;
+  background-color: #000;
   color: white;
   border: none;
   border-radius: 6px;
